@@ -32,11 +32,11 @@ func ChatID(id int64) filters.Reaction {
 func NewReactionEmoji(reaction string) filters.Reaction {
 	return func(mru *gotgbot.MessageReactionUpdated) bool {
 		for _, r := range mru.NewReaction {
-			if r.MergeReactionType().Emoji == reaction {
+			// Check if the emoji matches
+			if r.Emoji == reaction {
 				return true
 			}
 		}
-
 		return false
 	}
 }
@@ -44,11 +44,11 @@ func NewReactionEmoji(reaction string) filters.Reaction {
 func OldReactionEmoji(reaction string) filters.Reaction {
 	return func(mru *gotgbot.MessageReactionUpdated) bool {
 		for _, r := range mru.OldReaction {
-			if r.MergeReactionType().Emoji == reaction {
+			// Check if the emoji matches
+			if r.Emoji == reaction {
 				return true
 			}
 		}
-
 		return false
 	}
 }
